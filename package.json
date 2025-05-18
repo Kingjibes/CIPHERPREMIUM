@@ -1,46 +1,16 @@
-  
-  
-
-
-{
-  "description": "session",
-  "main": "./malvin.js",
-  "type": "commonjs",
-  "engines": {
-    "node": ">=20.0.0"
-  }
-  
-  "scripts": {
-    "start": "pm2 start malvin.js --deep-monitoring --attach --name MUZAN SIGMA",
-    "stop": "pm2 stop MUZAN SIGMA",
-    "restart": "pm2 restart MUZAN SIGMA"
-  }
-  
-  "author": "MUZAN SIGMA",
-  "license": "GPL-3.0 license",
-  "dependencies": {
-    "@whiskeysockets/baileys": "^6.6.7",
-    "awesome-phonenumber": "^2.64.0",
-    "body-parser": "^1.20.1",
-    "express": "^4.18.2",
-    "megajs": "^1.1.0",
-    "path": "^0.12.7",
-    "phone": "3.1.30",
-    "pino": "^8.1.0",
-    "pm2": "^5.2.0",
-    "qrcode": "^1.5.3"
-  }
-
-
 {
   "name": "premium-offers-site",
   "type": "module",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite preview --port $PORT --host"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
