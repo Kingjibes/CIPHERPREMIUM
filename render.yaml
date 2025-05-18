@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: premium-offers-site
+    env: node
+    plan: free  # or "starter" if you need more resources
+    region: oregon  # or any preferred region: oregon, frankfurt, etc.
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.x
+    healthCheckPath: /
