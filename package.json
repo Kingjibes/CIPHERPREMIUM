@@ -1,16 +1,14 @@
+  
+
 {
   "name": "premium-offers-site",
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "start": "vite preview --port $PORT --host"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.5",
