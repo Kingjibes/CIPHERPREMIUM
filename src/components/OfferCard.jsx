@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,9 +15,9 @@ function OfferCard({ offer }) {
       <Card className="overflow-hidden h-full flex flex-col">
         <CardHeader className="bg-gradient-to-br from-primary to-secondary p-6">
           <CardTitle className="text-2xl font-bold text-primary-foreground">{offer.title}</CardTitle>
-          {offer.siteName && (
+          {offer.site_name && (
             <CardDescription className="text-primary-foreground/80 pt-1">
-              From: {offer.siteName}
+              From: {offer.site_name}
             </CardDescription>
           )}
         </CardHeader>
