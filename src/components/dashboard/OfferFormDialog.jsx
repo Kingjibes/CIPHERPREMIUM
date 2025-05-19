@@ -33,7 +33,7 @@ function OfferFormDialog({ isOpen, onClose, onSubmit, initialData }) {
     if (initialData) {
       setFormState({
         title: initialData.title || '',
-        siteName: initialData.siteName || '',
+        siteName: initialData.site_name || '',
         instructions: initialData.instructions || '',
         warning1: initialData.warnings?.[0] || '',
         warning2: initialData.warnings?.[1] || '',
@@ -59,7 +59,7 @@ function OfferFormDialog({ isOpen, onClose, onSubmit, initialData }) {
 
     const offerDataPayload = {
       title: formState.title,
-      siteName: formState.siteName,
+      site_name: formState.siteName,
       instructions: formState.instructions,
       warnings: [formState.warning1, formState.warning2, formState.warning3],
       link: formState.link
