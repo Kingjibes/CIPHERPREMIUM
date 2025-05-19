@@ -68,9 +68,9 @@ function ContactPage() {
                     {detail.cta}
                   </a>
                 </Button>
-                {detail.method === "Email" && <p className="text-xs text-muted-foreground">Replace "richvybs92@gmail.com" with your actual email address.</p>}
-                {detail.method === "WhatsApp" && <p className="text-xs text-muted-foreground">Replace "+233557488116" in the link with your full WhatsApp number including country code (e.g., 1XXXXXXXXXX).</p>}
-                {detail.method === "Telegram" && <p className="text-xs text-muted-foreground">Replace "t.me/HACK_ERPRO" in the link with your Telegram username.</p>}
+                {detail.method === "Email" && <p className="text-xs text-muted-foreground"></p>}
+                {detail.method === "WhatsApp" && <p className="text-xs text-muted-foreground"></p>}
+                {detail.method === "Telegram" && <p className="text-xs text-muted-foreground"></p>}
               </CardContent>
             </Card>
           </motion.div>
