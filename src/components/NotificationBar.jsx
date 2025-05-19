@@ -44,11 +44,11 @@ function NotificationBar() {
               <p className="ml-3 text-sm font-medium text-foreground">{notification.message}</p>
             </div>
             <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" className="text-green-600 hover:bg-green-100" onClick={() => window.open('https://wa.me', '_blank')}>
+              <Button variant="ghost" size="sm" className="text-green-600 hover:bg-green-100" onClick={() => window.open('https://whatsapp.com/channel/0029Vb3wqli8V0tfOrWXwk2K')}>
                 <WhatsAppIcon />
                 <span className="ml-1.5 hidden sm:inline">WhatsApp</span>
               </Button>
-              <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-blue-100" onClick={() => window.open('https://t.me', '_blank')}>
+              <Button variant="ghost" size="sm" className="text-blue-600 hover:bg-blue-100" onClick={() => window.open('https://t.me/ciphertech2')}>
                 <TelegramIcon />
                 <span className="ml-1.5 hidden sm:inline">Telegram</span>
               </Button>
