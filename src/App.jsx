@@ -1,20 +1,20 @@
 
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from '@/components/ui/toaster';
-import { useAuth } from '@/contexts/AuthContext';
-import MainLayout from '@/components/layout/MainLayout';
-import DashboardPage from '@/pages/DashboardPage';
-import FreeServicesPage from '@/pages/FreeServicesPage';
-import PurchasePlansPage from '@/pages/PurchasePlansPage';
-import ProfilePage from '@/pages/ProfilePage';
-import AboutPage from '@/pages/AboutPage';
-import ContactPage from '@/pages/ContactPage';
-import LoginPage from '@/pages/LoginPage';
-import RegisterPage from '@/pages/RegisterPage';
-import NotFoundPage from '@/pages/NotFoundPage';
-import NotificationBar from '@/components/NotificationBar';
-import Footer from '@/components/layout/Footer';
+import { Toaster } from './components/ui/toaster';
+import { useAuth } from './contexts/AuthContext';
+import MainLayout from './components/layout/MainLayout';
+import DashboardPage from './pages/DashboardPage';
+import FreeServicesPage from './pages/FreeServicesPage';
+import PurchasePlansPage from './pages/PurchasePlansPage';
+import ProfilePage from './pages/ProfilePage';
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import NotFoundPage from './pages/NotFoundPage';
+import NotificationBar from './components/NotificationBar';
+import Footer from './components/layout/Footer';
 import { Loader2 } from 'lucide-react';
 
 function ProtectedRoute({ children }) {
