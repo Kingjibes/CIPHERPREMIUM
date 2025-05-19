@@ -9,7 +9,7 @@ function Header({ toggleSidebar }) {
   const { showNotification } = useNotification();
 
   const handleNotificationClick = () => {
-    showNotification("This is a sample notification with social media links!", "info", null);
+    showNotification("follow us on our channels for giveaway and constant updates!", "info", null);
   };
 
   return (
