@@ -8,22 +8,22 @@ const contactDetails = [
   {
     icon: <Mail className="h-6 w-6 text-primary" />,
     method: "Email",
-    value: "your-email@example.com",
-    link: "mailto:your-email@example.com",
+    value: "Email Us Here",
+    link: "mailto:richvybs92@gmail.com",
     cta: "Send Email"
   },
   {
     icon: <Smartphone className="h-6 w-6 text-green-500" />,
     method: "WhatsApp",
     value: "CipherTech Support",
-    link: "https://wa.me/YOUR_WHATSAPP_NUMBER",
+    link: "https://wa.link/t8wg2v",
     cta: "Chat on WhatsApp"
   },
   {
     icon: <Send className="h-6 w-6 text-blue-500" />,
     method: "Telegram",
-    value: "@YourTelegramUsername",
-    link: "https://t.me/YOUR_TELEGRAM_USERNAME",
+    value: "Send Us A Message Through telegram",
+    link: "t.me/HACK_ERPRO",
     cta: "Message on Telegram"
   }
 ];
@@ -68,9 +68,9 @@ function ContactPage() {
                     {detail.cta}
                   </a>
                 </Button>
-                {detail.method === "Email" && <p className="text-xs text-muted-foreground">Replace "your-email@example.com" with your actual email address.</p>}
-                {detail.method === "WhatsApp" && <p className="text-xs text-muted-foreground">Replace "YOUR_WHATSAPP_NUMBER" in the link with your full WhatsApp number including country code (e.g., 1XXXXXXXXXX).</p>}
-                {detail.method === "Telegram" && <p className="text-xs text-muted-foreground">Replace "YOUR_TELEGRAM_USERNAME" in the link with your Telegram username.</p>}
+                {detail.method === "Email" && <p className="text-xs text-muted-foreground">Replace "richvybs92@gmail.com" with your actual email address.</p>}
+                {detail.method === "WhatsApp" && <p className="text-xs text-muted-foreground">Replace "+233557488116" in the link with your full WhatsApp number including country code (e.g., 1XXXXXXXXXX).</p>}
+                {detail.method === "Telegram" && <p className="text-xs text-muted-foreground">Replace "t.me/HACK_ERPRO" in the link with your Telegram username.</p>}
               </CardContent>
             </Card>
           </motion.div>
