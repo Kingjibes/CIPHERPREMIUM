@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -54,7 +53,12 @@ function LoginPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  <Button variant="link" asChild className="p-0 h-auto text-xs text-primary" disabled={isSubmitting}>
+                     <Link to="/forgot-password">Forgot password?</Link>
+                  </Button>
+                </div>
                 <Input
                   id="password"
                   type="password"
