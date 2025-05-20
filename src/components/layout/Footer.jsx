@@ -5,7 +5,7 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-card border-t mt-auto">
+    <footer className="bg-card border-t">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
         <div className="flex justify-center items-center mb-4">
           <ShieldAlert className="h-8 w-8 gradient-text mr-2" />
