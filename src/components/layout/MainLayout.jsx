@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '@/components/layout/Header';
@@ -12,7 +11,7 @@ function MainLayout() {
   };
 
   return (
-    <div className="flex h-screen bg-muted/40">
+    <div className="flex h-full bg-muted/40"> {/* Changed h-screen to h-full */}
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex flex-col flex-1">
         <Header toggleSidebar={toggleSidebar} />
