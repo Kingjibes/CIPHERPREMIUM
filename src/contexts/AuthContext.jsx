@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
   const register = async (name, email, password) => {
     return handleRegister(name, email, password, setLoading, toast, {
       data: { name },
-      emailRedirectTo: 'https://cipherpremium.onrender.com/SuccessPage'
+      emailRedirectTo: 'https://cipherpremium.onrender.com/success'
     });
   };
 
