@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from '@/components/ui/toaster';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,12 +17,13 @@ import SuccessPage from '@/pages/SuccessPage';
 import NotFoundPage from '@/pages/NotFoundPage';
 import NotificationBar from '@/components/NotificationBar';
 import Footer from '@/components/layout/Footer';
+import Preloader from '@/components/Preloader'; 
 import { Loader2 } from 'lucide-react';
 
 function ProtectedRoute({ children }) {
-  const { user, loading } = useAuth();
+  const { user, loading: authSessionLoading } = useAuth();
   
-  if (loading) {
+  if (authSessionLoading) {
     return (
       <div className="flex-grow flex flex-col items-center justify-center bg-background">
         <Loader2 className="h-16 w-16 animate-spin text-primary mb-4" />
@@ -38,12 +39,24 @@ function ProtectedRoute({ children }) {
 }
 
 function App() {
-  const { user, loading } = useAuth();
+  const [appLoading, setAppLoading] = useState(true);
+  const { user, loading: authSessionLoading } = useAuth();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setAppLoading(false);
+    }, 4000); 
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (appLoading) {
+    return <Preloader />;
+  }
 
   const authPaths = ['/login', '/register', '/forgot-password', '/reset-password', '/success'];
   const isAuthPath = authPaths.some(path => window.location.pathname.startsWith(path));
 
-  if (loading && !user && !isAuthPath) {
+  if (authSessionLoading && !user && !isAuthPath && !appLoading) { // Check appLoading too
      return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-background">
         <Loader2 className="h-16 w-16 animate-spin text-primary mb-4" />
@@ -56,8 +69,8 @@ function App() {
     <div className="flex flex-col min-h-screen">
       <NotificationBar />
       <Toaster />
-      <div className="flex-grow flex flex-col"> {/* Added flex flex-col here */}
-        <main className="flex-grow"> {/* This main wraps all routes */}
+      <div className="flex-grow flex flex-col">
+        <main className="flex-grow">
           <Routes>
             <Route path="/login" element={user ? <Navigate to="/" /> : <LoginPage />} />
             <Route path="/register" element={user ? <Navigate to="/" /> : <RegisterPage />} />
