@@ -69,7 +69,7 @@ export const handleLogout = async (setLoading, setUser, toast) => {
     toast({ title: "Logout Failed", description: error.message, variant: "destructive" });
     return;
   }
-  setUser(null); // This will be handled by onAuthStateChange as well, but good for immediate feedback
+  setUser(null); 
   toast({ title: "Logged Out", description: "You have been successfully logged out." });
 };
 
@@ -109,7 +109,7 @@ export const handleSendPasswordResetEmail = async (email, setLoading, toast) => 
   }
   setLoading(true);
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
-     redirectTo: `${window.location.origin}/reset-password`,
+     redirectTo: `${window.location.origin}/reset-password`, // This URL must be whitelisted in Supabase
   });
   setLoading(false);
 
@@ -121,7 +121,8 @@ export const handleSendPasswordResetEmail = async (email, setLoading, toast) => 
   return true; 
 };
 
-export const handleResetPassword = async (newPassword, setLoading, toast) => {
+// newPassword is the only argument needed as Supabase handles the session
+export const handleResetPassword = async (newPassword, setLoading, toast) => { 
   if (!validatePassword(newPassword)) {
       toast({ 
           title: "Password Reset Failed", 
@@ -133,6 +134,8 @@ export const handleResetPassword = async (newPassword, setLoading, toast) => {
   }
 
   setLoading(true);
+  // Supabase uses the active session (established by the token from the email link)
+  // to know which user's password to update.
   const { error } = await supabase.auth.updateUser({ password: newPassword });
   setLoading(false);
 
@@ -140,7 +143,6 @@ export const handleResetPassword = async (newPassword, setLoading, toast) => {
     toast({ title: "Password Reset Failed", description: error.message, variant: "destructive" });
     return false;
   }
-  // Success toast is handled in ResetPasswordPage after navigation
   return true;
 };
 
