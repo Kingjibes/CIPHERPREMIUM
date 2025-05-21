@@ -10,10 +10,10 @@ import { useToast } from "@/components/ui/use-toast";
 
 function ProfilePage() {
   const { user, changePassword, updateUsername, loading: authLoading } = useAuth();
-  const [currentPassword, setCurrentPassword] = useState('');
+  // Removed currentPassword from state as it's not needed for Supabase updateUser
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+  // const [showCurrentPassword, setShowCurrentPassword] = useState(false); // Not needed
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
   
@@ -30,7 +30,7 @@ function ProfilePage() {
     }
   }, [user]);
 
-  const handleChangePassword = async (e) => {
+  const handleChangePasswordSubmit = async (e) => {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
       toast({
@@ -41,18 +41,23 @@ function ProfilePage() {
       return;
     }
     setIsSubmittingPassword(true);
-    const success = await changePassword(currentPassword, newPassword);
+    // Pass only newPassword to changePassword, as currentPassword is not required by Supabase for updateUser
+    const success = await changePassword(newPassword); 
     setIsSubmittingPassword(false);
     if (success) {
-      setCurrentPassword('');
+      // setCurrentPassword(''); // Not needed
       setNewPassword('');
       setConfirmNewPassword('');
     }
   };
 
-  const handleUpdateUsername = async (e) => {
+  const handleUpdateUsernameSubmit = async (e) => {
     e.preventDefault();
-    if (!newUsername.trim() || newUsername.trim() === user.name) {
+    if (!newUsername.trim()) {
+      toast({ title: "Update Failed", description: "Username cannot be empty.", variant: "destructive" });
+      return;
+    }
+    if (newUsername.trim() === user.name) {
       setIsEditingUsername(false);
       return;
     }
@@ -66,7 +71,7 @@ function ProfilePage() {
 
   if (authLoading && !user) {
     return (
-      <div className="flex items-center justify-center py-12">
+      <div className="flex-grow flex flex-col items-center justify-center py-12">
         <Loader2 className="h-12 w-12 animate-spin text-primary" />
       </div>
     );
@@ -74,7 +79,7 @@ function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-12 flex-grow flex flex-col items-center justify-center">
         <h2 className="text-xl font-semibold text-muted-foreground">Please log in to view your profile.</h2>
       </div>
     );
@@ -85,9 +90,9 @@ function ProfilePage() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-8 max-w-2xl mx-auto p-4 md:p-0"
+      className="space-y-8 max-w-2xl mx-auto p-4 md:p-0 flex-grow" // Added flex-grow
     >
-      <div className="text-center">
+      <div className="text-center pt-8"> {/* Added padding top */}
         <UserCircle className="h-24 w-24 text-primary mx-auto mb-4" />
         <h1 className="text-3xl font-bold tracking-tight gradient-text">{user.name}</h1>
         <p className="text-lg text-muted-foreground flex items-center justify-center">
@@ -107,7 +112,7 @@ function ProfilePage() {
           <div>
             <Label htmlFor="username">Username</Label>
             {isEditingUsername ? (
-              <form onSubmit={handleUpdateUsername} className="flex items-center gap-2 mt-1">
+              <form onSubmit={handleUpdateUsernameSubmit} className="flex items-center gap-2 mt-1">
                 <Input
                   id="username"
                   type="text"
@@ -115,7 +120,7 @@ function ProfilePage() {
                   onChange={(e) => setNewUsername(e.target.value)}
                   disabled={isSubmittingUsername}
                 />
-                <Button type="submit" size="sm" disabled={isSubmittingUsername || newUsername.trim() === user.name}>
+                <Button type="submit" size="sm" disabled={isSubmittingUsername || newUsername.trim() === user.name || !newUsername.trim()}>
                   {isSubmittingUsername ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
                 </Button>
                 <Button type="button" variant="ghost" size="sm" onClick={() => { setIsEditingUsername(false); setNewUsername(user.name); }} disabled={isSubmittingUsername}>
@@ -139,7 +144,7 @@ function ProfilePage() {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="mb-8"> {/* Added margin bottom */}
         <CardHeader>
           <CardTitle className="flex items-center">
             <Lock className="mr-2 h-5 w-5 text-primary" />
@@ -148,29 +153,8 @@ function ProfilePage() {
           <CardDescription>Update your password for enhanced security. Must be 8+ characters and include letters, numbers, and symbols.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleChangePassword} className="space-y-6">
-            <div className="relative">
-              <Label htmlFor="currentPassword">Current Password</Label>
-              <Input
-                id="currentPassword"
-                type={showCurrentPassword ? "text" : "password"}
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-                required
-                className="mt-1"
-                disabled={isSubmittingPassword}
-              />
-              <Button 
-                type="button" 
-                variant="ghost" 
-                size="icon" 
-                className="absolute right-1 top-7 h-7 w-7"
-                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                disabled={isSubmittingPassword}
-              >
-                {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </Button>
-            </div>
+          <form onSubmit={handleChangePasswordSubmit} className="space-y-6">
+            {/* Current Password field removed as it's not required by Supabase for updateUser */}
             <div className="relative">
               <Label htmlFor="newPassword">New Password</Label>
               <Input
